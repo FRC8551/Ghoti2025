@@ -30,6 +30,9 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void setSpeed(double speed) {
-    m_motor.set(VictorSPXControlMode.PercentOutput, speed);
+    // m_motor.set(VictorSPXControlMode.PercentOutput, speed);
+
+    // Temporary disable for 2025 CLK Lighted Christmas Parade
+    m_motor.set(VictorSPXControlMode.PercentOutput, 0);
   }
 }
