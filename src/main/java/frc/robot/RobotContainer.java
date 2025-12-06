@@ -119,28 +119,32 @@ public class RobotContainer {
 
         private void configureBindings() {
 
-                m_driverController.x()
-                                .whileTrue(new AlignWithNearestCoralStationCmd(m_swerveSubsystem, new Transform2d(
-                                                Units.inchesToMeters(17.625),
-                                                Units.inchesToMeters(0),
-                                                Rotation2d.fromDegrees(180))));
+                m_driverController.y()
+                                .onTrue(new InstantCommand(() -> m_swerveSubsystem.zeroGyro()));
 
-                m_driverController.leftBumper()
-                                .whileTrue(new AlignWithNearestSectorTag(m_swerveSubsystem, new Transform2d(
-                                                Units.inchesToMeters(13.625),
-                                                Units.inchesToMeters(3),
-                                                Rotation2d.fromDegrees(-90))));
+                // m_driverController.x()
+                // .whileTrue(new AlignWithNearestCoralStationCmd(m_swerveSubsystem, new
+                // Transform2d(
+                // Units.inchesToMeters(17.625),
+                // Units.inchesToMeters(0),
+                // Rotation2d.fromDegrees(180))));
 
-                m_driverController.rightBumper()
-                                .whileTrue(new AlignWithNearestSectorTag(m_swerveSubsystem, new Transform2d(
-                                                Units.inchesToMeters(13.625),
-                                                Units.inchesToMeters(16.5),
-                                                Rotation2d.fromDegrees(-90))));
+                // m_driverController.leftBumper()
+                // .whileTrue(new AlignWithNearestSectorTag(m_swerveSubsystem, new Transform2d(
+                // Units.inchesToMeters(13.625),
+                // Units.inchesToMeters(3),
+                // Rotation2d.fromDegrees(-90))));
 
-                m_driverController.povDown().onTrue(m_climberSubsystem.setSpeedCommand(-0.6))
-                                .onFalse(m_climberSubsystem.setSpeedCommand(0));
-                m_driverController.povUp().onTrue(m_climberSubsystem.setSpeedCommand(0.6))
-                                .onFalse(m_climberSubsystem.setSpeedCommand(0));
+                // m_driverController.rightBumper()
+                // .whileTrue(new AlignWithNearestSectorTag(m_swerveSubsystem, new Transform2d(
+                // Units.inchesToMeters(13.625),
+                // Units.inchesToMeters(16.5),
+                // Rotation2d.fromDegrees(-90))));
+
+                // m_driverController.povDown().onTrue(m_climberSubsystem.setSpeedCommand(-0.6))
+                // .onFalse(m_climberSubsystem.setSpeedCommand(0));
+                // m_driverController.povUp().onTrue(m_climberSubsystem.setSpeedCommand(0.6))
+                // .onFalse(m_climberSubsystem.setSpeedCommand(0));
 
                 // DRIVERS CONTROLS ^^^^^^^^^^^^^^^^^^
                 // OPERATORS CONTROLS BELOW CAUSE THERE'S NO DOWN ARROW ON THIS KEYBOARD

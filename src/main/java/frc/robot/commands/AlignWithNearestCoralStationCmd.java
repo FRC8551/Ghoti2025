@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.util.AprilTagUtils;
@@ -17,9 +18,9 @@ public class AlignWithNearestCoralStationCmd extends Command {
   private final SwerveSubsystem m_swerveSubsystem;
 
   private final ProfiledPIDController m_xController = new ProfiledPIDController(2, 0, 0,
-      new TrapezoidProfile.Constraints(2, 0.8));
+      new TrapezoidProfile.Constraints(2, 1));
   private final ProfiledPIDController m_yController = new ProfiledPIDController(2, 0, 0,
-      new TrapezoidProfile.Constraints(2, 0.8));
+      new TrapezoidProfile.Constraints(2, 1));
 
   private final Transform2d m_offset;
 
@@ -66,16 +67,22 @@ public class AlignWithNearestCoralStationCmd extends Command {
     Pose2d tagPose = AprilTagUtils.getAprilTagPose3d(m_coralStationTag).toPose2d();
     m_targetPose = tagPose.transformBy(m_offset);
 
+    SmartDashboard.putNumber("", m_coralStationTag);
+
     if (!m_swerveSubsystem.isRedAlliance()) {
       m_swerveSubsystem.drive(
-          m_xController.calculate(m_swerveSubsystem.getPose().getX(), m_targetPose.getX()),
-          m_yController.calculate(m_swerveSubsystem.getPose().getY(), m_targetPose.getY()),
+          m_xController.calculate(m_swerveSubsystem.getPose().getX(),
+              m_targetPose.getX()),
+          m_yController.calculate(m_swerveSubsystem.getPose().getY(),
+              m_targetPose.getY()),
           m_targetPose.getRotation().getSin(),
           m_targetPose.getRotation().getCos());
     } else {
       m_swerveSubsystem.drive(
-          -m_xController.calculate(m_swerveSubsystem.getPose().getX(), m_targetPose.getX()),
-          -m_yController.calculate(m_swerveSubsystem.getPose().getY(), m_targetPose.getY()),
+          -m_xController.calculate(m_swerveSubsystem.getPose().getX(),
+              m_targetPose.getX()),
+          -m_yController.calculate(m_swerveSubsystem.getPose().getY(),
+              m_targetPose.getY()),
           m_targetPose.getRotation().getSin(),
           m_targetPose.getRotation().getCos());
     }

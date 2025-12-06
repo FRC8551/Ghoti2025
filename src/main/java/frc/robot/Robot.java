@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.util.Elastic;
@@ -15,6 +18,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
+
+  private final PowerDistribution m_powerDist = new PowerDistribution(0, ModuleType.kCTRE);
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -34,6 +39,8 @@ public class Robot extends TimedRobot {
     } else if (DriverStation.isTeleop()) {
       Elastic.selectTab("Teleoperated");
     }
+
+    SmartDashboard.putNumber("LED Current", m_powerDist.getCurrent(5));
   }
 
   @Override

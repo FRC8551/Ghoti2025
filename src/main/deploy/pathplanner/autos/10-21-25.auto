@@ -7,25 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "New Path"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AlignWithNearestSectorTagLeft"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Elevator L4"
+            "pathName": "Goal2Depot"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.2
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Depot2Goal"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L3"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.8
           }
         },
         {
@@ -33,23 +39,11 @@
           "data": {
             "name": "Shoot Coral"
           }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 5.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Elevator L1"
-          }
         }
       ]
     }
   },
-  "resetOdom": false,
+  "resetOdom": true,
   "folder": null,
   "choreoAuto": false
 }
